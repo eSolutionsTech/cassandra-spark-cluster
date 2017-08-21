@@ -1,0 +1,46 @@
+version: '2'
+services:
+    node01:
+        image: cassandra:3.9
+        ports:
+            - "7000:7000"
+            - "7001:7001"
+            - "9042:9042"
+            - "9160:9160"
+            - "7199:7199"
+        volumes:
+            - ./data1:/var/lib/cassandra
+        environment:
+            - CASSANDRA_BROADCAST_ADDRESS=node01
+
+    node02:
+        image: cassandra:3.9
+        ports:
+            - "17000:7000"
+            - "17001:7001"
+            - "19042:9042"
+            - "19160:9160"
+            - "17199:7199"
+        volumes:
+            - ./data2:/var/lib/cassandra
+        environment:
+            - CASSANDRA_BROADCAST_ADDRESS=node02
+            - CASSANDRA_SEEDS=node01            
+        links:
+            - node01:node01
+
+    node03:
+        image: cassandra:3.9
+        ports:
+            - "27000:7000"
+            - "27001:7001"
+            - "29042:9042"
+            - "29160:9160"
+            - "27199:7199"
+        volumes:
+            - ./data3:/var/lib/cassandra
+        environment:
+            - CASSANDRA_BROADCAST_ADDRESS=node03            
+            - CASSANDRA_SEEDS=node01            
+        links:
+            - node01:node01
