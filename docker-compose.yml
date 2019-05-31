@@ -1,5 +1,17 @@
 version: '2'
 services:
+  zeppelin:
+    image: apache/zeppelin:0.8.1
+    links:
+      - node1:cassandra1
+      - node2:cassandra2
+      - node3:cassandra3
+    ports:
+      - 8080:8080
+      - 8081:8081
+      - 4040:4040
+    volumes:
+      - ./znotebooks:/zeppelin/notebook
     node01:
         image: cassandra:3.9
         ports:
@@ -12,7 +24,6 @@ services:
             - ./data1:/var/lib/cassandra
         environment:
             - CASSANDRA_BROADCAST_ADDRESS=node01
-
     node02:
         image: cassandra:3.9
         ports:
@@ -28,7 +39,6 @@ services:
             - CASSANDRA_SEEDS=node01            
         links:
             - node01:node01
-
     node03:
         image: cassandra:3.9
         ports:
