@@ -36,3 +36,32 @@ UN  192.168.0.3  3.14 MiB   256          ?       0aeccf1a-d86f-4bec-968c-cfdea9f
 UN  192.168.0.4  3.5 MiB    256          ?       9fa89b89-ae38-49c6-8c1a-f8c7c1d50359  rack1
 ```
 This means that all the nodes are up (U) and operating normally (N)
+
+## Zeppelin
+### Cassandra Interpreter config
+* Zeppelin -> Interpreter
+* Search for *cassandra*
+* Edit
+* Change property:
+```
+    cassandra.hosts  	cassandra
+```
+### Spark Interpreter config
+* Zeppelin -> Interpreter
+* Search for *spark*
+* Edit
+* Add property:
+```
+    spark.cassandra.connection.host 	cassandra
+```
+* Check property:
+```
+    master 	local[*]
+```
+* Add dependencies and exclude *netty*:
+
+| artifact                                                | exclude        |   |
+|:--------------------------------------------------------|----------------|---|
+| com.datastax.spark:spark-cassandra-connector_2.11:2.3.2 | io.netty:netty |   |
+| org.postgresql:postgresql:9.2-1004-jdbc41               |                |   |
+
