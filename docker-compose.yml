@@ -1,17 +1,17 @@
 version: '2'
 services:
-  zeppelin:
-    image: apache/zeppelin:0.8.1
-    links:
-      - node01:cassandra1
-      - node02:cassandra2
-      - node03:cassandra3
-    ports:
-      - 8080:8080
-      - 8081:8081
-      - 4040:4040
-    volumes:
-      - ./znotebooks:/zeppelin/notebook
+    zeppelin:
+        image: apache/zeppelin:0.8.1
+        links:
+            - node01:cassandra1
+            - node02:cassandra2
+            - node03:cassandra3
+        ports:
+            - 8080:8080
+            - 8081:8081
+            - 4040:4040
+        volumes:
+            - ./znotebooks:/zeppelin/notebook
     node01:
         image: cassandra:3.9
         ports:
