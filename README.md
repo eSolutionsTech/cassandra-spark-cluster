@@ -44,7 +44,7 @@ This means that all the nodes are up (U) and operating normally (N)
 * Edit
 * Change property:
 ```
-    cassandra.hosts  	cassandra
+    cassandra.hosts  	node01,node02,node03
 ```
 ### Spark Interpreter config
 * Zeppelin -> Interpreter
@@ -52,7 +52,7 @@ This means that all the nodes are up (U) and operating normally (N)
 * Edit
 * Add property:
 ```
-    spark.cassandra.connection.host 	cassandra
+    spark.cassandra.connection.host 	node01,node02,node03
 ```
 * Check property:
 ```
